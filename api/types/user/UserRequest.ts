@@ -29,5 +29,6 @@ export interface SignupRequest extends Request {
     last_name: string;
     email: string;
     password: string;
+    role: string;
   };
 }

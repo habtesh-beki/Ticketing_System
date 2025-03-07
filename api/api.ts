@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import { ENV } from "../shared/utils/env";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
@@ -9,7 +10,7 @@ const app = express();
 dotenv.config();
 
 app.use(express.json());
-
+app.use(cors());
 const DB = ENV.dbConnection ?? " ";
 
 mongoose
