@@ -32,7 +32,8 @@ class UserRepository {
     last_name: string,
     email: string,
 
-    password: string
+    password: string,
+    role: string
   ) {
     const checkUser = await User.findOne({ email });
 
