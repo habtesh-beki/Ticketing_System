@@ -5,7 +5,7 @@ import {
   getAllTicket,
   updateTicket,
 } from "../controller/ticket.controller";
-import { authenticateJWT } from "../middlewares/middleware";
+import { authenticateJWT, authorizeAdmin } from "../middlewares/middleware";
 
 const router = Router();
 
@@ -13,6 +13,8 @@ router
   .route("/tickets")
   .post(authenticateJWT, catchControllerError(createTicket))
   .get(catchControllerError(getAllTicket));
-router.route("/tickets/:id").put(catchControllerError(updateTicket));
+router
+  .route("/tickets/:id")
+  .put(authorizeAdmin, catchControllerError(updateTicket));
 
 export { router as ticketRoute };
