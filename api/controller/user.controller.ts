@@ -17,7 +17,7 @@ export const findUserById = (req: UserByIdRequest, res: Response) => {
 };
 
 export const signup = async (req: SignupRequest, res: Response) => {
-  const { first_name, last_name, email, password } = req.body;
+  const { first_name, last_name, email, password, role } = req.body;
 
   if (!first_name) throw new AppError(402, "First Name is required to login.");
   if (!last_name) throw new AppError(402, "Last Name is required to login.");
@@ -33,7 +33,13 @@ export const signup = async (req: SignupRequest, res: Response) => {
       400,
       "Another user has already registerd with that email."
     );
-  const user = await userRepo.create(first_name, last_name, email, password);
+  const user = await userRepo.create(
+    first_name,
+    last_name,
+    email,
+    password,
+    role
+  );
 
   APITerminal.respondWithSuccess<AuthPayload>(
     res,
